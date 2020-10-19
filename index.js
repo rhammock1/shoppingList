@@ -23,31 +23,25 @@ function main() {
       $('.shopping-list').append(template);
       this.reset();
   });
-  
-  
-
 }
 
 function markOffOn() {
-  $('ul').on('focus', '.shopping-item-toggle', function(event) {
+  $('ul').on('click', '.shopping-item-toggle', function(event) {
     //event.stopPropagation();
     console.log('the button was clicked');
-    $(this).parent().siblings().toggleClass('shopping-item__checked');
-    //$(this).closest().toggleClass('shopping-item__checked');
+    //$(this).parent().siblings().toggleClass('shopping-item__checked');
+    $(this.closest('li').children[0]).toggleClass('shopping-item__checked');
+    
   });
-
-
 }
 
 function deleteItem() {
-  $('ul').on('focus', '.shopping-item-delete', function(event) {
+  $('ul').on('click', '.shopping-item-delete', function(event) {
     //event.stopPropagation();
     console.log('the DELETE button was clicked');
     $(this).closest('li').remove();
-    //$(this).closest().toggleClass('shopping-item__checked');
+    
   });
-
-
 }
 
 $(main);
