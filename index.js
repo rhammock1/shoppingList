@@ -48,9 +48,9 @@ function deleteItem() {
 }
 
 function startUp() {
-  $(addItemToList);
-  $(markOffOn);
-  $(deleteItem);
+  addItemToList();
+  markOffOn();
+  deleteItem();
 }
 
 $(startUp);
