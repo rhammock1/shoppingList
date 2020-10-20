@@ -1,14 +1,9 @@
-//enter items by entering text and hitting enter or button
-//check and uncheck items on the list when check button is clicked
-// remove items from the list
-
-
-function main() {
+function addItemToList() {
   $('#js-shopping-list-form').on('submit', function(event) {
     event.preventDefault();
     
     let listItem = $('#shopping-list-entry').val();
-    console.log(listItem);
+    //console.log(listItem);
     let template = `<li>
         <span class="shopping-item">${listItem}</span>
         <div class="shopping-item-controls">
@@ -20,15 +15,22 @@ function main() {
           </button>
         </div>
       </li>`;
-      $('.shopping-list').append(template);
-      this.reset();
+    $('.shopping-list').append(template);
+    this.reset();
+    //console.log(this);
   });
 }
 
 function markOffOn() {
-  $('ul').on('click', '.shopping-item-toggle', function(event) {
-    //event.stopPropagation();
-    console.log('the button was clicked');
+    //event delegation
+  // parent element                   child selector
+  $('.shopping-list').on('click', '.shopping-item-toggle', function(event) {
+    
+    //console.log('the button was clicked');
+
+    //both below work, but children[0] is most specific. script could
+    //break though if children[0] changes/moves
+
     //$(this).parent().siblings().toggleClass('shopping-item__checked');
     $(this.closest('li').children[0]).toggleClass('shopping-item__checked');
     
@@ -36,14 +38,19 @@ function markOffOn() {
 }
 
 function deleteItem() {
-  $('ul').on('click', '.shopping-item-delete', function(event) {
-    //event.stopPropagation();
-    console.log('the DELETE button was clicked');
+  //event delegation
+  // parent element                   child selector
+  $('.shopping-list').on('click', '.shopping-item-delete', function(event) {
+    //console.log('the DELETE button was clicked');
     $(this).closest('li').remove();
     
   });
 }
 
-$(main);
-$(markOffOn);
-$(deleteItem);
+function startUp() {
+  $(addItemToList);
+  $(markOffOn);
+  $(deleteItem);
+}
+
+$(startUp);
